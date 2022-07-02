@@ -1,7 +1,7 @@
 import Player from "./Player";
 import Board from "./Board";
-import {toPercent} from "./Utils";
-import {name as HanvValueName} from "./HandValue/index";
+import { toPercent } from "./Utils";
+import { name as HanvValueName } from "./HandValue/index";
 
 interface iPlayerResult {
   player: Player,
@@ -38,6 +38,10 @@ class ResultPlayer {
     return this.getTies() === 0 ? 0 : toPercent(this.getTies() / this.table.getIterations());
   }
 
+  getIterations(): number {
+    return this.table.getIterations();
+  }
+
   getTiesPercentageString(): string {
     return `${this.table.isApproximate() ? "~" : ""}${this.getTiesPercentage().toFixed(2)}%`;
   }
@@ -47,7 +51,7 @@ class ResultPlayer {
   }
 
   getRanks() {
-    let ranks: {[key: string]: ResultRank} = {};
+    let ranks: { [key: string]: ResultRank } = {};
     for (let rank in this.data.ranks) {
       ranks[rank] = new ResultRank(rank, this);
     }

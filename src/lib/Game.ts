@@ -1,7 +1,7 @@
 import Table from "./Table";
 import Card from "./Card";
 import Player from "./Player";
-import {AvailableGames, CardNumbers, Games as iGames, Nullable} from "./Interfaces";
+import { AvailableGames, CardNumbers, Games as iGames, Nullable } from "./Interfaces";
 import * as HandValue from "./HandValue/index";
 
 export default class Game {

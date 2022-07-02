@@ -2,7 +2,7 @@ import Player from "./Player";
 import Deck from "./Deck";
 import Game from "./Game";
 import Board from "./Board";
-import {Games as iGames, IHand, Nullable} from "./Interfaces";
+import { Games as iGames, IHand, Nullable } from "./Interfaces";
 
 export default class Table {
 
@@ -83,6 +83,20 @@ export default class Table {
     return this.setPlayerHand(hand, seat)
   }
 
+  private fill_players_without_hands(players: Array<Player>): Array<Player> {
+    return players.map(player => {
+      if (!player.inHand()) {
+        player.randomHand();
+      }
+      return player;
+    })
+  }
+
+  // set other players with random hand
+  randomPlayers() {
+    this.players = this.fill_players_without_hands(this.players);
+  }
+
   calculate() {
     if (this.players.filter(player => player.inHand()).length < 2)
       throw new Error("Minimum 2 players required");
@@ -91,7 +105,8 @@ export default class Table {
   }
 
   setBoard(cards: Array<string>) {
-    this.board.setFlop(cards.slice(0, 3));
+    if (cards.length > 0)
+      this.board.setFlop(cards.slice(0, 3));
     if (cards.length > 3)
       this.board.setTurn(cards[3]);
     if (cards.length === 5)

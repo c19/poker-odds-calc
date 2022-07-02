@@ -1,6 +1,7 @@
 import Card from "./Card";
 import Table from "./Table";
-import {IHand, Nullable} from "./Interfaces";
+import { IHand, Nullable } from "./Interfaces";
+import { sampleSize } from "lodash";
 
 export default class Player {
 
@@ -24,6 +25,17 @@ export default class Player {
       return card.setOwner(this);
     });
     return this;
+  }
+
+  randomHand() {
+    if (this.hand) {
+      throw new Error(`Player ${this} already has hand`);
+    }
+    let cards = this.Table.getDeck().getAvailableCards();
+    this.hand = sampleSize(cards, 2);
+    for (var card of this.hand) {
+      card.setOwner(this);
+    }
   }
 
   getHand() {
