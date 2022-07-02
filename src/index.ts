@@ -1,4 +1,5 @@
 import Table from "./lib/Table";
+export { calc_winrate } from "./lib/WinRate";
 import "./lib/Utils";
 
 export class TexasHoldem extends Table {

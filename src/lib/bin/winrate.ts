@@ -1,5 +1,4 @@
 import { TexasHoldem } from '../../index';
-import Card from '../Card';
 import { IHand } from '../Interfaces';
 
 let iteration = 0;
